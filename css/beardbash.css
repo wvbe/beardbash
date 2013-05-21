@@ -1,0 +1,59 @@
+            * {
+                padding: 0;
+                margin: 0;
+                vertical-align: top;
+                font-weight: normal !important;
+            }
+            body {
+                background-color: #454039;
+                margin: 50px;
+                font-family: 'Share Tech Mono', 'Courier New';
+                text-shadow: 0 1px 1px rgba(0,0,0,0.5);
+                font-size: 11px;
+                line-height: 12px;
+                color: #9C927A;
+            }
+            a {
+                background-color: #9C927A;
+                color: #454039;
+                text-decoration: none;
+                display: inline-block;
+                padding: 0 2px;
+                text-shadow: none;
+                box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+            }
+            a:hover {
+	cursor:pointer;
+            }
+            .line {
+                margin: 5px 0;
+                white-space: nowrap;
+            }
+            .line > * {
+                display: inline-block;
+            }
+            .line p {
+                white-space: pre-wrap;
+            }
+            .line .prefix {
+                width: 30px;
+                text-align: right;
+                margin-right: 10px;
+            }
+            .highlighted, .input {
+                color: #C2B598;
+            }
+            .type {
+                position: fixed;
+                opacity: 0;
+                z-index: -9999;
+                bottom:  -100px;
+                left: 50%;
+            }
+            .cursor {
+                width: 6px;
+                height: 12px;
+                background-color: #c2b598;
+                margin-left: 1px;
+                box-shadow: 0 1px 1px rgba(0,0,0,0.5);
+            }
