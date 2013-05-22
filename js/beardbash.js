@@ -13,9 +13,9 @@ function BeardBash(selector, send_callback, receive_callback) {
         html = '';
         html += '<input type="text" class="type" />';
         html += '<div class="output-wrapper">';
-        html += '<div class="line output"><label class="prefix">&nbsp;</label><p>Loading...</p></div>';
+        html += '<div class="line output"><label class="prefix">&nbsp;</label><div class="verbose">Loading...</div></div>';
         html += '<noscript>';
-        html += '<div class="line output"><label class="prefix"></label><p>Failed, please enable Javascript to run this application</p></div>';
+        html += '<div class="line output"><label class="prefix"></label><div class="verbose">Failed, please enable Javascript to run this application</div></div>';
         html += '</noscript>';
         html += '</div>';
         html += '<div class="input-wrapper line input" class="line"><label class="prefix">&gt;&gt;</label><p class="faux_input"></p><span class="cursor" style="display: inline-block;">&nbsp;</span></div>';
@@ -90,7 +90,7 @@ function BeardBash(selector, send_callback, receive_callback) {
         if(m==undefined||m==null||m=='') return;
         if(p==undefined) p = '&nbsp;';
         if(c==undefined) c = 'line output'; else c = 'line '+c;
-        $(this.selector+' .output-wrapper').append('<div class="'+c+'"><label class="prefix">'+p+'</label><p>'+m+'</p></div>');
+        $(this.selector+' .output-wrapper').append('<div class="'+c+'"><label class="prefix">'+p+'</label><div class="verbose">'+m+'</div></div>');
     }
     
     this.blink = function() {
@@ -140,4 +140,5 @@ function BeardBash(selector, send_callback, receive_callback) {
         this.bindpresses();
         this.resume();
     }
+    
 }

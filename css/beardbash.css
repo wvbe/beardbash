@@ -33,7 +33,7 @@
             .beardbash .line > * {
                 display: inline-block;
             }
-            .beardbash .line p {white-space: pre-wrap;
+            .beardbash .line .verbose {white-space: pre-wrap;
             }
             .beardbash .line .prefix {
                 width: 30px;
