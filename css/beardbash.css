@@ -27,8 +27,8 @@
 				cursor:pointer;
             }
             .beardbash .line {
-                margin: 5px 0;
                 white-space: nowrap;
+                line-height: 13px;
             }
             .beardbash .line > * {
                 display: inline-block;
