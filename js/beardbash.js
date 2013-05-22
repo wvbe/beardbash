@@ -84,7 +84,6 @@ function BeardBash(selector, send_callback, receive_callback) {
     }
     this.receive = function(response) {
         this.receive_callback(response);
-        this.resume();
     }
     
     this.output = function(m, p, c) {
@@ -139,9 +138,6 @@ function BeardBash(selector, send_callback, receive_callback) {
         this.buildhtml();
         this.bindclicks();
         this.bindpresses();
-        
-        this.blink();
-        
-        this.focus();
+        this.resume();
     }
 }

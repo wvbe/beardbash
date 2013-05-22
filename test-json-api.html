@@ -16,8 +16,13 @@
                 redir_delay: 1000
             }
             $(document).ready(function() {
+                
                 beard = new BeardBash(
                     config.beardbash,
+            
+            
+                    // send_callback, required
+                    // stuff to do with -data- besides clearing the input field etc.
                     function(data, callback) {
                         this.output(data, '>', 'input');
                         workaround = this;
@@ -30,21 +35,23 @@
                             }
                             if(callback!=undefined) callback();
                         });
-                        
                     },
+                    // receive_callback, not required
+                    // stuff to do with -data- once it comes back in
+                    // defaults to 
                     function(data, callback) {
                         if(callback!=undefined) callback();
                         this.output(data.verbose, undefined, undefined);
-                        this.resume(); // you'll probably want to keep this one
+                        
                         if(data.redirect!=undefined)
                         window.setTimeout(function() {
                             window.location = data.redirect
                         },config.redir_delay);
+                        this.resume();
                     }
                 );
                 beard.start();
                 window.setTimeout(function() {
-                    beard.output('Connecting...');
                     beard.send('/connect x-54.com');
                 }, 780)
             });

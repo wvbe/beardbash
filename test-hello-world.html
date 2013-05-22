@@ -15,10 +15,13 @@
                     '#beardbash',
                     function(data) {
                         console.log('any sending logic goes here');
+                        this.output(data, 'OUT:', 'input');
                         this.receive('The api replies to your message "'+data+'"'); // bogus server response
                     },
                     function(data) {
+                        this.output(data, 'IN:', 'output');
                         console.log('any receiving logic goes here');
+                        //this.output('')
                         this.resume(); // you'll probably want to keep this one
                     }
                 );
