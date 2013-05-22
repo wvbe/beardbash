@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+    <head>       
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta charset="UTF-8" />
+        <title>BEARDBASH 0.3</title>
+	<link href="http://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet" type="text/css" />
+	<link href="css/beardbash.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/beardbash-2.js"></script>
+        <script type="text/javascript">
+            var beard;
+            var config = {
+                beardbash: '#beardbash',
+                api: 'README.md',
+                redir_delay: 1000
+            }
+            
+            
+            $(document).ready(function() {
+                
+                beard = new BeardBash(
+                    config.beardbash,
+            
+            
+                    // send_callback, required
+                    // stuff to do with -data- besides clearing the input field etc.
+                    // -data- is contents of input field
+                    function(data) {
+                        this.output(data, '>', 'input');
+                        workaround = this;
+                        $.post(config.api, {input: data, json: true}, function(response) {
+                            workaround.receive(response);
+                        });
+                    },
+                    // receive_callback, not required
+                    // stuff to do with -data- once it comes back in
+                    // defaults to 
+                    function(response) {
+                        try{
+                            response = JSON.parse(response);
+                            if(response.verbose!=undefined) workaround.output(response.verbose);
+                            else workaround.output(response, '');
+                        } catch(e){
+                            workaround.output(response, '?');
+                        }
+                        this.resume();
+                    }
+                );
+                
+                
+                beard.start();
+                window.setTimeout(function() {
+                    beard.send('/connect x-54.com');
+                }, 780)
+            });
+        </script>
+    </head>
+    <body>
+        <div id="beardbash">            
+        </div>    
+    </body>
+</html>
