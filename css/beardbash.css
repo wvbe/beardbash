@@ -12,6 +12,7 @@
                 font-size: 11px;
                 line-height: 12px;
                 color: #9C927A;
+                height: 100%;
             }
             a {
                 background-color: #9C927A;
@@ -23,34 +24,34 @@
                 box-shadow: 0 1px 1px rgba(0,0,0,0.2);
             }
             a:hover {
-	cursor:pointer;
+				cursor:pointer;
             }
-            .line {
+            .beardbash .line {
                 margin: 5px 0;
                 white-space: nowrap;
             }
-            .line > * {
+            .beardbash .line > * {
                 display: inline-block;
             }
-            .line p {
-                white-space: pre-wrap;
+            .beardbash .line p {white-space: pre-wrap;
             }
-            .line .prefix {
+            .beardbash .line .prefix {
                 width: 30px;
                 text-align: right;
                 margin-right: 10px;
             }
-            .highlighted, .input {
+            .beardbash .highlighted,
+            .beardbash .input {
                 color: #C2B598;
             }
-            .type {
+            .beardbash .type {
                 position: fixed;
                 opacity: 0;
                 z-index: -9999;
                 bottom:  -100px;
                 left: 50%;
             }
-            .cursor {
+            .beardbash .cursor {
                 width: 6px;
                 height: 12px;
                 background-color: #c2b598;

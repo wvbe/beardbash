@@ -9,7 +9,18 @@ function BeardBash(selector, send_callback, receive_callback) {
         this.receive_callback = this.output;
     else
         this.receive_callback = receive_callback;
-    
+    this.buildhtml = function() {
+        html = '';
+        html += '<input type="text" class="type" />';
+        html += '<div class="output-wrapper">';
+        html += '<div class="line output"><label class="prefix">&nbsp;</label><p>Loading...</p></div>';
+        html += '<noscript>';
+        html += '<div class="line output"><label class="prefix"></label><p>Failed, please enable Javascript to run this application</p></div>';
+        html += '</noscript>';
+        html += '</div>';
+        html += '<div class="input-wrapper line input" class="line"><label class="prefix">&gt;&gt;</label><p class="faux_input"></p><span class="cursor" style="display: inline-block;">&nbsp;</span></div>';
+        $(this.selector).html(html).addClass('beardbash');
+    }
     this.bindclicks = function() {
         workaround = this;
         document.addEventListener('click', function() { workaround.focus(); });
@@ -79,10 +90,12 @@ function BeardBash(selector, send_callback, receive_callback) {
         this.receive_callback(response);
     }
     
-    this.output = function(m) {
-            $(this.selector+' .output-wrapper').append('<div class="line output"><label class="prefix">&nbsp;</label><p>'+m+'</p></div>');
+    this.output = function(m, p, c) {
+        if(p==undefined) p = '&nbsp;';
+        if(c==undefined) c = 'line output'; else c = 'line '+c;
+        $(this.selector+' .output-wrapper').append('<div class="'+c+'"><label class="prefix">'+p+'</label><p>'+m+'</p></div>');
     }
-
+    
     this.blink = function() {
         el = $(this.selector+' .cursor');
         if(this.mode=='on') {
@@ -124,9 +137,13 @@ function BeardBash(selector, send_callback, receive_callback) {
             .replace(/'/g, "&#039;");
     }
     this.start = function() {
-        this.blink();
+        
+        this.buildhtml();
         this.bindclicks();
         this.bindpresses();
+        
+        this.blink();
+        
         workaround = this;
         window.setTimeout(function() {
             workaround.output('Ready, welcome');
