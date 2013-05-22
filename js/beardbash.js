@@ -73,7 +73,6 @@ function BeardBash(selector, send_callback, receive_callback) {
         this.mode = 'off';
         this.blink();
         if(input=='/clear') $(this.selector+' .output-wrapper').html('');
-        $(this.selector+' .output-wrapper').append('<div class="line input"><label class="prefix">&#62;</label><p>'+input+'</p></div>');
         $(this.selector+' .type').val('');
         $(this.selector+' .faux_input').html('');
         if(input=='/clear') {
@@ -84,13 +83,12 @@ function BeardBash(selector, send_callback, receive_callback) {
 
     }
     this.receive = function(response) {
-        this.mode = 'start';
-        this.blink();
-        this.output(response);
         this.receive_callback(response);
+        this.resume();
     }
     
     this.output = function(m, p, c) {
+        if(m==undefined||m==null||m=='') return;
         if(p==undefined) p = '&nbsp;';
         if(c==undefined) c = 'line output'; else c = 'line '+c;
         $(this.selector+' .output-wrapper').append('<div class="'+c+'"><label class="prefix">'+p+'</label><p>'+m+'</p></div>');
@@ -144,11 +142,6 @@ function BeardBash(selector, send_callback, receive_callback) {
         
         this.blink();
         
-        workaround = this;
-        window.setTimeout(function() {
-            workaround.output('Ready, welcome');
-            workaround.send('/connect x-54.com');
-        }, 780);
         this.focus();
     }
 }

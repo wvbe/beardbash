@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+    <head>       
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta charset="UTF-8" />
+        <title>BEARDBASH 0.3</title>
+	<link href="http://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet" type="text/css" />
+	<link href="css/beardbash.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/beardbash.js"></script>
+        <script type="text/javascript">
+            var beard;
+            var config = {
+                beardbash: '#beardbash',
+                api: 'http://www.x-54.com/api.php',
+                redir_delay: 1000
+            }
+            $(document).ready(function() {
+                beard = new BeardBash(
+                    config.beardbash,
+                    function(data, callback) {
+                        this.output(data, '>', 'input');
+                        workaround = this;
+                        $.post(config.api, {input: data, json: true}, function(response) {
+                            try{
+                                response = JSON.parse(response);
+                                workaround.receive(response);
+                            } catch(e){
+                                workaround.output('Server-side error: could not parse response<br />'+response);
+                            }
+                            if(callback!=undefined) callback();
+                        });
+                        
+                    },
+                    function(data, callback) {
+                        if(callback!=undefined) callback();
+                        this.output(data.verbose, undefined, undefined);
+                        this.resume(); // you'll probably want to keep this one
+                        if(data.redirect!=undefined)
+                        window.setTimeout(function() {
+                            window.location = data.redirect
+                        },config.redir_delay);
+                    }
+                );
+                beard.start();
+                window.setTimeout(function() {
+                    beard.output('Connecting...');
+                    beard.send('/connect x-54.com');
+                }, 780)
+            });
+        </script>
+    </head>
+    <body>
+        <div id="beardbash">            
+        </div>    
+    </body>
+</html>

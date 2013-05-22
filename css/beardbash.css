@@ -14,7 +14,7 @@
                 color: #9C927A;
                 height: 100%;
             }
-            a {
+            a:not(.incognito) {
                 background-color: #9C927A;
                 color: #454039;
                 text-decoration: none;
