@@ -23,8 +23,8 @@ function BeardBash(selector, send_callback, receive_callback) {
     }
     this.bindclicks = function() {
         workaround = this;
-        document.addEventListener('click', function() { workaround.focus(); });
-        document.removeEventListener('click');
+        document.addEventListener('click', function(e) { workaround.focus(); e.preventDefault(); });
+        
     
         $(document).on('click', this.selector+' a', function(e) {
             input = $(this).data('input');
@@ -48,8 +48,8 @@ function BeardBash(selector, send_callback, receive_callback) {
                 if(workaround.mode=='off') return;
                 workaround.send();
             }
+            e.preventDefault();
         });
-        document.removeEventListener('keyup');
 
 
         
