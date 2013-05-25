@@ -1,41 +1,62 @@
-            * {
-                padding: 0;
-                margin: 0;
-                vertical-align: top;
-                font-weight: normal !important;
-                font-size: inherit;
-                font-family: inherit;
-                color: inherit;
-                background-color: transparent;
-            }
+
+
+@backgroundColor: #454039; 
+@foregroundColor: #9C927A;
+@highlightedColor: #C2B598;
+@highlightedBackground: rgba(0,0,0,0.1);
+@shadowFaint: rgba(0,0,0,0.2);
+@shadowStrong: rgba(0,0,0,0.5);
+
+// Greyscale:
+//     @backgroundColor: #eee; 
+//     @foregroundColor: #999;
+//     @highlightedColor: #666;
+//     @highlightedBackground: rgba(255,255,255,1);
+//     @shadowFaint: rgba(255,255,255,1);
+//     @shadowStrong: rgba(255,255,255,1);
+
+            
             body {
-                background-color: #454039;
-                margin: 50px;
-                font-family: 'Share Tech Mono', 'Courier New';
-                text-shadow: 0 1px 1px rgba(0,0,0,0.5);
-                font-size: 11px;
-                line-height: 12px;
-                color: #9C927A;
+background-color: @backgroundColor;
+                margin: 0;
                 height: 100%;
             }
-            a:not(.incognito) {
-                background-color: #9C927A;
-                color: #454039 ;
+            
+
+
+.beardbash {
+    padding: 30px 0 0 0;
+    background-color: @backgroundColor;
+    font-family: 'Share Tech Mono', 'Courier New';
+    text-shadow: 0 1px 1px @shadowStrong;
+    font-size: 11px;
+    line-height: 13px;
+    color: @foregroundColor;
+    a:not(.incognito) {
+                background-color: @foregroundColor;
+                color: @backgroundColor;
                 text-decoration: none;
                 display: inline-block;
                 padding: 0 0;
                 text-shadow: none;
-                box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+                box-shadow: 0 1px 1px @shadowFaint;
             }
             a:hover {
                 cursor:pointer;
             }
+    * {
+        padding: 0;
+        margin: 0;
+        vertical-align: top;
+        font-weight: normal !important;
+        font-size: inherit;
+        font-family: inherit;
+        color: inherit;
+        background-color: transparent;
+    }
 
-
-.beardbash {
     .line {
         white-space: nowrap;
-        line-height: 13px;
         > * {
             display: inline-block;
         }
@@ -58,7 +79,7 @@
         }
     .highlighted,
     .input {
-        color: #C2B598;
+        color: @highlightedColor;
     }
     .type {
         border: none;
@@ -77,21 +98,21 @@
         opacity: 0;
         width: 6px;
         height: 12px;
-        background-color: #c2b598;
+        background-color: @highlightedColor;
         margin-left: 1px;
-        box-shadow: 0 1px 1px rgba(0,0,0,0.5);
+        box-shadow: 0 1px 1px @shadowStrong;
     }
     
 }
 .beardbash:hover {
     .input-wrapper {
-        outline: 1px solid rgba(0,0,0,0.1);
+        outline: 1px solid @highlightedBackground;
     }
 }
 .beardbash.focus {
     .input-wrapper {
-        outline: 1px solid rgba(0,0,0,0.1);
-        background-color: rgba(0,0,0,0.1);
+        outline: 1px solid @highlightedBackground;
+        background-color: @highlightedBackground;
     }
 }
 .beardbash.focus.available {

@@ -1,4 +1,30 @@
-* {
+body {
+  background-color: #454039;
+  margin: 0;
+  height: 100%;
+}
+.beardbash {
+  padding: 30px 0 0 0;
+  background-color: #454039;
+  font-family: 'Share Tech Mono', 'Courier New';
+  text-shadow: 0 1px 1px rgba(0,0,0,0.5);
+  font-size: 11px;
+  line-height: 13px;
+  color: #9C927A;
+}
+.beardbash a:not(.incognito) {
+  background-color: #9C927A;
+  color: #454039;
+  text-decoration: none;
+  display: inline-block;
+  padding: 0 0;
+  text-shadow: none;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+}
+.beardbash a:hover {
+  cursor: pointer;
+}
+.beardbash * {
   padding: 0;
   margin: 0;
   vertical-align: top;
@@ -8,31 +34,8 @@
   color: inherit;
   background-color: transparent;
 }
-body {
-  background-color: #454039;
-  margin: 50px;
-  font-family: 'Share Tech Mono', 'Courier New';
-  text-shadow: 0 1px 1px rgba(0,0,0,0.5);
-  font-size: 11px;
-  line-height: 12px;
-  color: #9C927A;
-  height: 100%;
-}
-a:not(.incognito) {
-  background-color: #9C927A;
-  color: #454039;
-  text-decoration: none;
-  display: inline-block;
-  padding: 0 0;
-  text-shadow: none;
-  box-shadow: 0 1px 1px rgba(0,0,0,0.2);
-}
-a:hover {
-  cursor: pointer;
-}
 .beardbash .line {
   white-space: nowrap;
-  line-height: 13px;
 }
 .beardbash .line > * {
   display: inline-block;
@@ -73,7 +76,7 @@ a:hover {
   opacity: 0;
   width: 6px;
   height: 12px;
-  background-color: #c2b598;
+  background-color: #C2B598;
   margin-left: 1px;
   box-shadow: 0 1px 1px rgba(0,0,0,0.5);
 }
