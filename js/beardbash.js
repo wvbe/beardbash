@@ -54,6 +54,10 @@ function BeardBash(selector, send_callback, receive_callback) {
             console.log('Focus on terminal '+beardbash_instances[sel].selector, beardbash_instances[sel]);
             //e.stopPropagation();
         });
+        $(this.selector+' .type').blur(function() {
+            console.log(sel+' lost focus');
+            $(sel).removeClass('focus');
+        });
     }
     
     this.send = function(input) {
