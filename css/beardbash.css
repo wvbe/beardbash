@@ -44,6 +44,9 @@
                 text-align: right;
                 margin-right: 10px;
             }
+            .beardbash .input-wrapper {
+                padding: 5px 0;
+            }
             .beardbash.focus .input-wrapper {
                 background-color: rgba(0,0,0,0.1);
             }
