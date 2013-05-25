@@ -11,7 +11,7 @@
         <script type="text/javascript">
             var beard;
             $(document).ready(function() {
-                beard = new BeardBash(
+                new BeardBash(
                     '#beardbash',
                     function(data) {
                         console.log('any sending logic goes here');
@@ -25,12 +25,12 @@
                         this.resume(); // you'll probably want to keep this one
                     }
                 );
-                beard.start();
+                start_beard();
             });
         </script>        
     </head>
     <body>
         <div id="beardbash">            
-        </div>    
+        </div>
     </body>
 </html>

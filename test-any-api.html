@@ -9,15 +9,14 @@
         <script type="text/javascript" src="js/jquery.min.js"></script>
         <script type="text/javascript" src="js/beardbash.js"></script>
         <script type="text/javascript">
-            var beards = [];
             var config = {
                 beardbash: '#beardbash',
                 api: 'README.md',
                 redir_delay: 1000
             }
-            $(document).ready(function() {
+           window.onload = function() {
                 for(i=0;i<2;i++) {
-                    beards.push(new BeardBash(
+                    new BeardBash(
                         config.beardbash+'-'+(i+1),           
 
                         // send_callback, required
@@ -25,9 +24,9 @@
                         // -data- is contents of input field
                         function(data) {
                             this.output(data, '>', 'input');
-                            workaround = this;
+                            sel = this.selector;
                             $.post(config.api, {input: data, json: true}, function(response) {
-                                workaround.receive(response);
+                                beardbash_instances[sel].receive(response);
                             });
                         },
                         // receive_callback, not required
@@ -36,23 +35,19 @@
                         function(response) {
                             try{
                                 response = JSON.parse(response);
-                                if(response.verbose!=undefined) workaround.output(response.verbose);
-                                else workaround.output(response, '');
+                                if(response.verbose!=undefined) beardbash_instances[sel].output(response.verbose);
+                                else beardbash_instances[sel].output(response, '');
                             } catch(e){
-                                workaround.output(response, '?');
+                                beardbash_instances[sel].output(response, '?');
                             }
                             this.resume();
                         }
-                    ));
+                    );
                 }
                 console.log(beardbash_instances);
-                for(i=0;i<beards.length;i++)
-                    beards[i].start();
-                window.setTimeout(function() {
-                    beards[0].send('/connect x-54.com');
-                    beards[1].send('/connect x-54.com');
-                }, 780)
-            });
+                start_beard();
+                console.log('end of onload');
+            };
         </script>
         <style>
             .beardbash {
@@ -72,6 +67,5 @@
         <div id="beardbash-3"></div>
         <div id="beardbash-4"></div>
         <div id="beardbash-5"></div>
-        
     </body>
 </html>

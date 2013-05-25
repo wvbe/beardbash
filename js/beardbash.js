@@ -1,6 +1,14 @@
 var beardbash_instances =[];
 var beardbash_blinker = false;
-
+function start_beard(beard_selector) {
+    if(beard_selector==undefined) {
+        for (var sel in beardbash_instances) {
+            beardbash_instances[sel].start();
+            beardbash_instances[sel].kickoff();
+        }
+    } else if(beardbash_instances[beard_selector]!=undefined)
+        beardbash_instances[beard_selector].start();
+}
 function BeardBash(selector, send_callback, receive_callback) {
     this.selector = selector;
     this.cursorspeed = 500;
@@ -25,26 +33,31 @@ function BeardBash(selector, send_callback, receive_callback) {
         $(this.selector).html(html).addClass('beardbash');
     }
     this.bindclicks = function() {
-        var workaround = this;
+        var sel = this.selector;
+        
+        // handle hyperlinks
         $(document).on('click', this.selector+' a', function(e) {
             input = $(this).data('input');
             if($(this).hasClass('no-takeover')) {
             } else if(input) {		
                     e.preventDefault();
-                    workaround.send(input);
+                    beardbash_instances[sel].send(input);
             } else {
                     e.preventDefault();
-                    workaround.send('/redirect '+$(this).attr('href'));
+                    beardbash_instances[sel].send('/redirect '+$(this).attr('href'));
             }
         });
+        
+        // focus on terminal on click
         $(this.selector).on('click', function(e) {
-            workaround.focus();
-            console.log('Focus on terminal '+workaround.selector, workaround);
+            beardbash_instances[sel].focus();
+            console.log('Focus on terminal '+beardbash_instances[sel].selector, beardbash_instances[sel]);
             //e.stopPropagation();
         });
     }
     
     this.send = function(input) {
+        this.focus();
         if(input==undefined)
             input = $(this.selector+' .faux_input').html();
         if(input=='') return;
@@ -74,13 +87,13 @@ function BeardBash(selector, send_callback, receive_callback) {
         el = $('.cursor');
         if(start==undefined) {
             el.toggle();
-            workaround = this;
-            beardbash_blinker = window.setTimeout(function() { workaround.blink(); }, this.cursorspeed);
+            sel = this.selector;
+            beardbash_blinker = window.setTimeout(function() { beardbash_instances[sel].blink(); }, this.cursorspeed);
         } else {
             el.show();
-            workaround = this;
+            sel = this.selector;
             window.clearTimeout(beardbash_blinker);
-            beardbash_blinker = window.setTimeout(function() { workaround.blink(); }, this.cursorspeed);
+            beardbash_blinker = window.setTimeout(function() { beardbash_instances[sel].blink(); }, this.cursorspeed);
         }
     }
     this.resume = function() {
@@ -110,9 +123,14 @@ function BeardBash(selector, send_callback, receive_callback) {
             .replace(/'/g, "&#039;");
     }
     this.start = function() {
+        console.log('starting');
         this.buildhtml();
         this.bindclicks();
         this.resume();
+    }
+    this.kickoff = function() {
+        this.focus();
+        $(this.selector).children('.verbose').append(' OK!');
     }
     this.input = function(e, input_content) {
         if(e.keyCode==13) {
@@ -126,14 +144,15 @@ function BeardBash(selector, send_callback, receive_callback) {
     if(beardbash_blinker==false) this.blink();
     beardbash_instances[this.selector+''] = this;
 }
+
 $(document).ready(function(){
     $(document).bind('keydown', function(e) {
         f = $('.beardbash.focus');
         if(f.length===1) {
-            key = '#'+f.attr('id');
+            sel = '#'+f.attr('id');
             window.setTimeout(function() {
-                if(beardbash_instances[key]!=undefined)
-                    beardbash_instances[key].input(e, $(key+' .type').val()+'');
+                if(beardbash_instances[sel]!=undefined)
+                    beardbash_instances[sel].input(e, $(sel+' .type').val()+'');
             }, 1);
         }
     });
