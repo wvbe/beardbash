@@ -7,57 +7,71 @@
 	<link href="http://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet" type="text/css" />
 	<link href="css/beardbash.css" rel="stylesheet" type="text/css" />
         <script type="text/javascript" src="js/jquery.min.js"></script>
-        <script type="text/javascript" src="js/beardbash-2.js"></script>
+        <script type="text/javascript" src="js/beardbash.js"></script>
         <script type="text/javascript">
-            var beard;
+            var beards = [];
             var config = {
                 beardbash: '#beardbash',
                 api: 'README.md',
                 redir_delay: 1000
             }
-            
-            
             $(document).ready(function() {
-                
-                beard = new BeardBash(
-                    config.beardbash,
-            
-            
-                    // send_callback, required
-                    // stuff to do with -data- besides clearing the input field etc.
-                    // -data- is contents of input field
-                    function(data) {
-                        this.output(data, '>', 'input');
-                        workaround = this;
-                        $.post(config.api, {input: data, json: true}, function(response) {
-                            workaround.receive(response);
-                        });
-                    },
-                    // receive_callback, not required
-                    // stuff to do with -data- once it comes back in
-                    // defaults to 
-                    function(response) {
-                        try{
-                            response = JSON.parse(response);
-                            if(response.verbose!=undefined) workaround.output(response.verbose);
-                            else workaround.output(response, '');
-                        } catch(e){
-                            workaround.output(response, '?');
+                for(i=0;i<2;i++) {
+                    beards.push(new BeardBash(
+                        config.beardbash+'-'+(i+1),           
+
+                        // send_callback, required
+                        // stuff to do with -data- besides clearing the input field etc.
+                        // -data- is contents of input field
+                        function(data) {
+                            this.output(data, '>', 'input');
+                            workaround = this;
+                            $.post(config.api, {input: data, json: true}, function(response) {
+                                workaround.receive(response);
+                            });
+                        },
+                        // receive_callback, not required
+                        // stuff to do with -data- once it comes back in
+                        // defaults to 
+                        function(response) {
+                            try{
+                                response = JSON.parse(response);
+                                if(response.verbose!=undefined) workaround.output(response.verbose);
+                                else workaround.output(response, '');
+                            } catch(e){
+                                workaround.output(response, '?');
+                            }
+                            this.resume();
                         }
-                        this.resume();
-                    }
-                );
-                
-                
-                beard.start();
+                    ));
+                }
+                console.log(beardbash_instances);
+                for(i=0;i<beards.length;i++)
+                    beards[i].start();
                 window.setTimeout(function() {
-                    beard.send('/connect x-54.com');
+                    beards[0].send('/connect x-54.com');
+                    beards[1].send('/connect x-54.com');
                 }, 780)
             });
         </script>
+        <style>
+            .beardbash {
+                display: inline-block;
+                width: 700px;
+            }
+            .beardbash .type {
+                position: static;
+                opacity: 1;
+                z-index: 900000;
+            }
+        </style>
     </head>
     <body>
-        <div id="beardbash">            
-        </div>    
+        <div id="beardbash-1"></div>
+        <div id="beardbash-2"></div>
+        <div id="beardbash-3"></div>
+        <div id="beardbash-4"></div>
+        <div id="beardbash-5"></div>
+        
     </body>
 </html>
