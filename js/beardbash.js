@@ -38,6 +38,7 @@ function BeardBash(selector, send_callback, receive_callback) {
         // handle hyperlinks
         $(document).on('click', this.selector+' a', function(e) {
             input = $(this).data('input');
+            beardbash_instances[sel].focus();
             if($(this).hasClass('no-takeover')) {
             } else if(input) {		
                     e.preventDefault();
@@ -111,6 +112,7 @@ function BeardBash(selector, send_callback, receive_callback) {
     this.focus = function() {
         $(this.selector+' .type').focus();
         if(!$(this.selector).hasClass('focus')) {
+            this.blink(true);
             $('.beardbash.focus').removeClass('focus');
             $(this.selector).addClass('focus');
             if(this.mode!='off') {
