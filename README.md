@@ -6,7 +6,7 @@ To initiate a "window" create a new BeardBash object with at least one argument,
 
 The functions to send to the API and receive from the API are defined in respectively the second and third argument of the BeardBash class constructor.
 
-You can use lessphp.php and beardbash.less in the css/ directory to compile a css file as follows
+You can use css/lessphp.php and css/beardbash.less compile a css file (css/beardbash.css). Drive a terminal to your clone/fork and type './less', or something similar to:
 
     php css/lessphp.php > css/beardbash.css
 
@@ -16,8 +16,6 @@ To-do's
 - Check for cross-browser issues (only tested in Chroma, ha!)
 - Remove console.logs
 - Build a really awesome example with multiple windows
-
-
 
 License
 -------

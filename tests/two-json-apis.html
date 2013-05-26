@@ -3,15 +3,15 @@
     <head>       
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta charset="UTF-8" />
-        <title>BEARDBASH 0.3</title>
+        <title>BEARDBASH</title>
 	<link href="http://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet" type="text/css" />
-	<link href="css/beardbash.css" rel="stylesheet" type="text/css" />
-        <script type="text/javascript" src="js/jquery.min.js"></script>
-        <script type="text/javascript" src="js/beardbash.js"></script>
+	<link href="../css/beardbash.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../js/jquery.min.js"></script>
+        <script type="text/javascript" src="../js/beardbash.js"></script>
         <script type="text/javascript">
             var config = {
                 beardbash: '#beardbash',
-                api: 'README.md',
+                api: 'http://www.x-54.com/api.php',
                 redir_delay: 1000
             }
            window.onload = function() {
@@ -40,27 +40,44 @@
                             } catch(e){
                                 beardbash_instances[sel].output(response, '?');
                             }
+                            this.focus();
                             this.resume();
                         }
                     );
                 }
-                console.log(beardbash_instances);
                 start_beard();
-                console.log('end of onload');
             };
         </script>
         <style>
-            .beardbash {
-                display: inline-block;
-                width: 700px;
-            }
+            body {
+                background-color: #454039;
+                margin: 0;
+                height: 100%;
+                overflow: overflow-y;
+              }
+              .output-wrapper {
+                  
+                  overflow: overflow-y;
+              }
+              .beardbash {
+                  display: inline-block;
+                  box-sizing: border-box;
+                  width: 50%;
+                  height: 100%;
+                  position: absolute;
+                  top: 0;
+                  overflow: hidden;
+              }
+              #beardbash-1 {
+                  left: 0;
+              }
+              #beardbash-2 {
+                  right: 0;
+              }
         </style>
     </head>
     <body>
         <div id="beardbash-1"></div>
         <div id="beardbash-2"></div>
-        <div id="beardbash-3"></div>
-        <div id="beardbash-4"></div>
-        <div id="beardbash-5"></div>
     </body>
 </html>

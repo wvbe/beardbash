@@ -52,11 +52,8 @@ function BeardBash(selector, send_callback, receive_callback) {
         // focus on terminal on click
         $(this.selector).on('click', function(e) {
             beardbash_instances[sel].focus();
-            console.log('Focus on terminal '+beardbash_instances[sel].selector, beardbash_instances[sel]);
-            //e.stopPropagation();
         });
         $(this.selector+' .type').blur(function() {
-            console.log(sel+' lost focus');
             $(sel).removeClass('focus');
         });
     }
@@ -102,15 +99,17 @@ function BeardBash(selector, send_callback, receive_callback) {
         }
     }
     this.resume = function() {
-        $(this.selector+' .type').val('');
+        $(this.selector+' .type').val('').focus();
         $(this.selector+' .faux_input').html('');
         this.mode = 'start';
         $(this.selector).addClass('available');
-        window.scrollTo(0, document.body.scrollHeight);
+        $(this.selector).animate({ scrollTop: $(this.selector+' .output-wrapper').height()}, 200);
+        //window.scrollTo(0, document.body.scrollHeight);
     }
 
     this.focus = function() {
         $(this.selector+' .type').focus();
+        //
         if(!$(this.selector).hasClass('focus')) {
             this.blink(true);
             $('.beardbash.focus').removeClass('focus');
@@ -129,7 +128,6 @@ function BeardBash(selector, send_callback, receive_callback) {
             .replace(/'/g, "&#039;");
     }
     this.start = function() {
-        console.log('starting');
         this.buildhtml();
         this.bindclicks();
         this.resume();
