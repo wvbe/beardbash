@@ -99,8 +99,7 @@ function BeardBash(selector, send_callback, receive_callback) {
         }
     }
     this.resume = function() {
-        jQuery(this.selector+' .type').val('').focus();
-        jQuery(this.selector+' .faux_input').html('');
+        jQuery(this.selector+' .type').focus();
         this.mode = 'start';
         jQuery(this.selector).addClass('available');
         jQuery(this.selector).animate({ scrollTop: jQuery(this.selector+' .output-wrapper').height()}, 200);
@@ -137,7 +136,7 @@ function BeardBash(selector, send_callback, receive_callback) {
         jQuery(this.selector).children('.verbose').append(' OK!');
     }
     this.input = function(e, input_content) {
-        if(e.keyCode==13) {
+        if(e.keyCode==13&&this.mode!=='off') {
             this.send(input_content);
             input_content = '';
         }
