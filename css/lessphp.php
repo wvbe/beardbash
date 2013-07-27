@@ -3487,6 +3487,8 @@ class lessc_formatter_lessjs extends lessc_formatter_classic {
 
 
 $less = new lessc();
+header("Content-type: text/css");
+header("X-Content-Type-Options: nosniff");
 echo $less->compile(file_get_contents(__DIR__.'/beardbash.less'));
 
 
