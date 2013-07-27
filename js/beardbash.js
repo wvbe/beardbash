@@ -24,9 +24,9 @@ function BeardBash(selector, send_callback, receive_callback) {
         html = '';
         html += '';
         html += '<div class="output-wrapper">';
-        html += '<div class="line output"><label class="prefix">&nbsp;</label><div class="verbose">Loading...</div></div>';
+        html += '<div class="line output system"><label class="prefix">&nbsp;</label><div class="verbose">Loading...</div></div>';
         html += '<noscript>';
-        html += '<div class="line output"><label class="prefix"></label><div class="verbose">Failed, please enable Javascript to run this application</div></div>';
+        html += '<div class="line output system"><label class="prefix"></label><div class="verbose">Failed, please enable Javascript to run this application</div></div>';
         html += '</noscript>';
         html += '</div>';
         html += '<div class="input-wrapper line input" class="line"><label class="prefix">&gt;&gt;</label><div style="position: relative;"><input type="text" class="type" /><p class="faux_input"></p><span class="cursor" style="display: inline-block;">&nbsp;</span></div></div>';
